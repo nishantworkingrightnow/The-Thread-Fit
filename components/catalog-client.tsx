@@ -22,6 +22,7 @@ export function CatalogClient({ products, initialQuery = "", initialCollection =
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const sizes = useMemo(() => uniqueValues(products, (product) => product.sizes), [products]);
   const colors = useMemo(() => uniqueValues(products, (product) => product.colors), [products]);
@@ -60,7 +61,17 @@ export function CatalogClient({ products, initialQuery = "", initialCollection =
 
   return (
     <div className="filters-layout">
-      <aside className="filters">
+      <button
+        className="filter-toggle"
+        type="button"
+        aria-expanded={filtersOpen}
+        onClick={() => setFiltersOpen((open) => !open)}
+      >
+        Filter options
+        <span>{filtersOpen ? "Close" : "Open"}</span>
+      </button>
+
+      <aside className={`filters${filtersOpen ? " open" : ""}`}>
         <p className="eyebrow">Filter catalog</p>
         <div className="filter-group">
           <label htmlFor="catalog-search">Search</label>
