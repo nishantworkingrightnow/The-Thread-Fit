@@ -36,7 +36,7 @@ export function BaggageClient() {
   if (!items.length) {
     return (
       <div className="empty-state">
-        <h2>Your baggage is empty.</h2>
+        <h2>Your cart is empty.</h2>
         <p className="muted">Add clothing with your preferred size and colour before placing an order.</p>
         <Link className="button" href="/products">
           Shop products

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BaggageClient } from "@/components/baggage-client";
 
 export const metadata: Metadata = {
-  title: "Baggage",
+  title: "Cart",
   description: "Review your selected clothing and place a WhatsApp order."
 };
 
@@ -12,7 +12,7 @@ export default function BaggagePage() {
       <div className="grid-heading">
         <div>
           <p className="eyebrow">Selected items</p>
-          <h1>Baggage</h1>
+          <h1>Cart</h1>
         </div>
       </div>
       <BaggageClient />

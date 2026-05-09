@@ -8,12 +8,12 @@ import { readBaggage, readWishlist } from "@/lib/storage";
 export function Header() {
   const router = useRouter();
   const [wishlistCount, setWishlistCount] = useState(0);
-  const [baggageCount, setBaggageCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     function syncCounts() {
       setWishlistCount(readWishlist().length);
-      setBaggageCount(
+      setCartCount(
         readBaggage().reduce((count, item) => count + item.quantity, 0)
       );
     }
@@ -64,7 +64,7 @@ export function Header() {
             Wishlist<span className="count-pill">{wishlistCount}</span>
           </Link>
           <Link className="count-link" href="/baggage">
-            Baggage<span className="count-pill">{baggageCount}</span>
+            Cart<span className="count-pill">{cartCount}</span>
           </Link>
         </div>
       </div>

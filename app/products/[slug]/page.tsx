@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ProductImageCarousel } from "@/components/product-image-carousel";
 import { ProductActions } from "@/components/product-actions";
 import { formatPrice } from "@/lib/format";
 import { getProductBySlug, getProducts } from "@/lib/sanity/products";
@@ -46,10 +47,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <section className="page-shell detail-layout">
-      <div className="detail-image">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={product.image} alt={product.title} />
-      </div>
+      <ProductImageCarousel title={product.title} images={product.images || [product.image]} />
 
       <div className="detail-copy">
         <p className="eyebrow">

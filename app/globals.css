@@ -47,6 +47,31 @@ img {
   max-width: 100%;
 }
 
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 3px;
+  background: #191512;
+}
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #191512, 0 0 5px #191512;
+  opacity: 1;
+  transform: rotate(3deg) translate(0, -4px);
+}
+
 h1,
 h2,
 h3,
@@ -427,11 +452,72 @@ h3,
 }
 
 .detail-image {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 5;
   border: 1px solid var(--border);
   border-radius: 36px;
   background: var(--accent-soft);
+}
+
+.product-carousel {
+  display: grid;
+  gap: 14px;
+}
+
+.carousel-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(247, 242, 235, 0.28);
+  border-radius: 999px;
+  background: rgba(25, 21, 18, 0.78);
+  color: #f7f2eb;
+  padding: 8px;
+  backdrop-filter: blur(12px);
+}
+
+.carousel-controls button {
+  border: 0;
+  border-radius: 999px;
+  background: #f7f2eb;
+  color: var(--text);
+  padding: 8px 12px;
+  font-weight: 900;
+}
+
+.carousel-controls span {
+  font-weight: 900;
+}
+
+.carousel-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.carousel-thumbnails button {
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  background: var(--accent-soft);
+  padding: 0;
+}
+
+.carousel-thumbnails button.active {
+  border-color: var(--accent);
+}
+
+.carousel-thumbnails img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .detail-copy h1 {
@@ -732,6 +818,16 @@ h3,
 
   .detail-image {
     border-radius: 26px;
+  }
+
+  .carousel-controls {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .carousel-thumbnails {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .detail-copy h1 {

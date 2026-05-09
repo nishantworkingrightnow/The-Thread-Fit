@@ -10,7 +10,7 @@ export function ProductActions({ product }: { product: Product }) {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [status, setStatus] = useState("");
 
-  const canAddToBaggage = useMemo(
+  const canAddToCart = useMemo(
     () => Boolean(product.inStock && selectedSize && selectedColor),
     [product.inStock, selectedColor, selectedSize]
   );
@@ -29,9 +29,17 @@ export function ProductActions({ product }: { product: Product }) {
     setIsWishlisted(nextWishlist.includes(product._id));
   }
 
-  function addToBaggage() {
-    if (!canAddToBaggage) {
+  function addToCart() {
+    if (!canAddToCart) {
       setStatus("Please choose an available size and colour.");
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Add ${product.title} in ${selectedSize} / ${selectedColor} to your cart?`
+    );
+
+    if (!confirmed) {
       return;
     }
 
@@ -56,7 +64,7 @@ export function ProductActions({ product }: { product: Product }) {
         ];
 
     writeBaggage(nextItems);
-    setStatus("Added to baggage.");
+    setStatus("Added to cart.");
   }
 
   return (
@@ -94,8 +102,8 @@ export function ProductActions({ product }: { product: Product }) {
       </div>
 
       <div className="inline-actions">
-        <button className="button" type="button" disabled={!canAddToBaggage} onClick={addToBaggage}>
-          Add to baggage
+        <button className="button" type="button" disabled={!canAddToCart} onClick={addToCart}>
+          Add to cart
         </button>
         <button className="button secondary" type="button" onClick={toggleWishlist}>
           {isWishlisted ? "Remove from wishlist" : "Add to wishlist"}

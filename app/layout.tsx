@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, Space_Grotesk } from "next/font/google";
+import { Suspense } from "react";
 import { Header } from "@/components/header";
+import { RouteProgress } from "@/components/route-progress";
 import "./globals.css";
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -35,6 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${hankenGrotesk.variable} ${spaceGrotesk.variable}`}>
+        <Suspense fallback={null}>
+          <RouteProgress />
+        </Suspense>
         <Header />
         <main>{children}</main>
       </body>
