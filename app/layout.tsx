@@ -3,6 +3,7 @@ import { Hanken_Grotesk, Space_Grotesk } from "next/font/google";
 import { Suspense } from "react";
 import { Header } from "@/components/header";
 import { RouteProgress } from "@/components/route-progress";
+import { getProducts } from "@/lib/sanity/products";
 import "./globals.css";
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -29,18 +30,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const products = await getProducts();
+  const validProductIds = products.map((product) => product._id);
+
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${hankenGrotesk.variable} ${spaceGrotesk.variable}`}>
         <Suspense fallback={null}>
           <RouteProgress />
         </Suspense>
-        <Header />
+        <Header validProductIds={validProductIds} />
         <main>{children}</main>
       </body>
     </html>

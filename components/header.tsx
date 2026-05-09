@@ -3,16 +3,28 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
-import { readBaggage, readWishlist } from "@/lib/storage";
+import { readBaggage, readWishlist, writeWishlist } from "@/lib/storage";
 
-export function Header() {
+type HeaderProps = {
+  validProductIds: string[];
+};
+
+export function Header({ validProductIds }: HeaderProps) {
   const router = useRouter();
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     function syncCounts() {
-      setWishlistCount(readWishlist().length);
+      const validProductIdSet = new Set(validProductIds);
+      const wishlist = readWishlist();
+      const validWishlist = wishlist.filter((productId) => validProductIdSet.has(productId));
+
+      if (validWishlist.length !== wishlist.length) {
+        writeWishlist(validWishlist);
+      }
+
+      setWishlistCount(validWishlist.length);
       setCartCount(
         readBaggage().reduce((count, item) => count + item.quantity, 0)
       );
@@ -26,7 +38,7 @@ export function Header() {
       window.removeEventListener("storage", syncCounts);
       window.removeEventListener("p1-storage", syncCounts);
     };
-  }, []);
+  }, [validProductIds]);
 
   function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

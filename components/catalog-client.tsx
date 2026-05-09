@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import { formatPrice } from "@/lib/format";
 import type { Product } from "@/lib/types";
@@ -23,6 +23,15 @@ export function CatalogClient({ products, initialQuery = "", initialCollection =
   const [color, setColor] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    setQuery(initialQuery);
+    setCollection(initialCollection);
+    setCategory("");
+    setSize("");
+    setColor("");
+    setMaxPrice("");
+  }, [initialCollection, initialQuery]);
 
   const sizes = useMemo(() => uniqueValues(products, (product) => product.sizes), [products]);
   const colors = useMemo(() => uniqueValues(products, (product) => product.colors), [products]);

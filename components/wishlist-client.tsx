@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
-import { readWishlist } from "@/lib/storage";
+import { readWishlist, writeWishlist } from "@/lib/storage";
 import type { Product } from "@/lib/types";
 
 export function WishlistClient({ products }: { products: Product[] }) {
@@ -11,7 +11,15 @@ export function WishlistClient({ products }: { products: Product[] }) {
 
   useEffect(() => {
     function syncWishlist() {
-      setWishlistIds(readWishlist());
+      const productIds = new Set(products.map((product) => product._id));
+      const wishlist = readWishlist();
+      const validWishlist = wishlist.filter((productId) => productIds.has(productId));
+
+      if (validWishlist.length !== wishlist.length) {
+        writeWishlist(validWishlist);
+      }
+
+      setWishlistIds(validWishlist);
     }
 
     syncWishlist();
@@ -22,7 +30,7 @@ export function WishlistClient({ products }: { products: Product[] }) {
       window.removeEventListener("storage", syncWishlist);
       window.removeEventListener("p1-storage", syncWishlist);
     };
-  }, []);
+  }, [products]);
 
   const wishlistProducts = useMemo(
     () => products.filter((product) => wishlistIds.includes(product._id)),
