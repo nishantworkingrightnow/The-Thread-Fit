@@ -4,7 +4,9 @@ import { getProducts } from "@/lib/sanity/products";
 
 export default async function HomePage() {
   const products = await getProducts();
-  const featuredProducts = products.filter((product) => product.featured).slice(0, 3);
+  const featuredProducts = products
+    .filter((product) => product.featured)
+    .slice(0, 3);
 
   return (
     <>
@@ -13,8 +15,9 @@ export default async function HomePage() {
           <p className="eyebrow">Menswear now, more collections soon</p>
           <h1>Clothing that feels sharp without trying too hard.</h1>
           <p>
-            Browse current men&apos;s stock, save pieces to your wishlist, add the right size and
-            colour to your baggage, and place your order through WhatsApp.
+            Browse current men&apos;s stock, save pieces to your wishlist, add
+            the right size and colour to your baggage, and place your order
+            through WhatsApp.
           </p>
           <div className="hero-actions">
             <Link className="button" href="/products?collection=men">
@@ -30,10 +33,7 @@ export default async function HomePage() {
           <div className="hero-card-image" />
           <div className="hero-card-copy">
             <p className="eyebrow">New drops</p>
-            <h2>Upload once in Sanity, publish everywhere.</h2>
-            <p className="muted">
-              Product images, sizes, colours, prices, and stock status are managed from the CMS.
-            </p>
+            <h2>Check out our latest collection.</h2>
           </div>
         </aside>
       </section>
