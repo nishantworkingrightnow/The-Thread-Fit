@@ -1,0 +1,9 @@
+<svg width="900" height="1125" viewBox="0 0 900 1125" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1125" fill="#efe3d3"/>
+  <rect x="175" y="225" width="550" height="675" rx="42" fill="#fffaf3" stroke="#191512" stroke-width="10"/>
+  <path d="M310 390C350 330 410 300 450 300C490 300 550 330 590 390" stroke="#191512" stroke-width="22" stroke-linecap="round"/>
+  <path d="M310 390V795H590V390" stroke="#191512" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M365 510H535" stroke="#756b61" stroke-width="18" stroke-linecap="round"/>
+  <path d="M365 590H535" stroke="#756b61" stroke-width="18" stroke-linecap="round"/>
+  <text x="450" y="995" text-anchor="middle" fill="#191512" font-family="Arial, sans-serif" font-size="54" font-weight="700">P1 Clothing</text>
+</svg>
