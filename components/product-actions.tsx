@@ -69,12 +69,16 @@ export function ProductActions({ product }: { product: Product }) {
 
   return (
     <div>
-      <div className="selector">
+      <div className="my-5 grid gap-2">
         <strong>Size</strong>
-        <div className="option-row">
+        <div className="flex flex-wrap gap-2.5">
           {product.sizes.map((size) => (
             <button
-              className={`option-button${selectedSize === size ? " active" : ""}`}
+              className={`rounded-full border px-3.5 py-2 font-heading font-extrabold ${
+                selectedSize === size
+                  ? "border-text bg-text text-white"
+                  : "border-border bg-surface text-text"
+              }`}
               key={size}
               type="button"
               onClick={() => setSelectedSize(size)}
@@ -85,12 +89,16 @@ export function ProductActions({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="selector">
+      <div className="my-5 grid gap-2">
         <strong>Colour</strong>
-        <div className="option-row">
+        <div className="flex flex-wrap gap-2.5">
           {product.colors.map((color) => (
             <button
-              className={`option-button${selectedColor === color ? " active" : ""}`}
+              className={`rounded-full border px-3.5 py-2 font-heading font-extrabold ${
+                selectedColor === color
+                  ? "border-text bg-text text-white"
+                  : "border-border bg-surface text-text"
+              }`}
               key={color}
               type="button"
               onClick={() => setSelectedColor(color)}
@@ -101,16 +109,25 @@ export function ProductActions({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="inline-actions">
-        <button className="button" type="button" disabled={!canAddToCart} onClick={addToCart}>
+      <div className="flex flex-wrap items-center gap-3 max-sm:grid max-sm:grid-cols-1">
+        <button
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-text bg-text px-5 font-heading font-bold text-white transition hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-50 max-sm:w-full"
+          type="button"
+          disabled={!canAddToCart}
+          onClick={addToCart}
+        >
           Add to cart
         </button>
-        <button className="button secondary" type="button" onClick={toggleWishlist}>
+        <button
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-text bg-transparent px-5 font-heading font-bold text-text transition hover:-translate-y-px max-sm:w-full"
+          type="button"
+          onClick={toggleWishlist}
+        >
           {isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
         </button>
       </div>
 
-      {status ? <p className="muted">{status}</p> : null}
+      {status ? <p className="mt-3 text-muted">{status}</p> : null}
     </div>
   );
 }

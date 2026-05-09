@@ -39,10 +39,13 @@ export function WishlistClient({ products }: { products: Product[] }) {
 
   if (!wishlistProducts.length) {
     return (
-      <div className="empty-state">
-        <h2>Your wishlist is empty.</h2>
-        <p className="muted">Save pieces while browsing so you can return to them quickly.</p>
-        <Link className="button" href="/products">
+      <div className="rounded-[28px] border border-border bg-surface p-6 max-sm:rounded-3xl max-sm:p-5">
+        <h2 className="font-heading text-2xl font-black">Your wishlist is empty.</h2>
+        <p className="mt-3 text-muted">Save pieces while browsing so you can return to them quickly.</p>
+        <Link
+          className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-text bg-text px-5 font-heading font-bold text-white transition hover:-translate-y-px"
+          href="/products"
+        >
           Start shopping
         </Link>
       </div>
@@ -50,7 +53,7 @@ export function WishlistClient({ products }: { products: Product[] }) {
   }
 
   return (
-    <div className="product-grid">
+    <div className="grid grid-cols-3 gap-[22px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-[18px]">
       {wishlistProducts.map((product) => (
         <ProductCard key={product._id} product={product} />
       ))}
